@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="datetime">
+        <div id="time"></div>
+        <div id="date"></div>
+        <div id="day"></div>
+    </div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+
+            //getting hours and minutes 
+            let hour = now.getHours();
+            const min = now.getMinutes();
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            hour = hour % 12;
+            hour = hour ? hour : 12;
+           const minutesFormatted = min < 10 ? '0' + min : min;
+           const timeString = `${hour} : ${minutesFormatted} : ${ampm}`;
+            
+           //getting date
+           const date = now.getDate();
+           const month = now.getMonth() + 1;
+           const year = now.getFullYear();
+           const dateString = `${date < 10 ? '0' + date : date} - ${month < 10 ? '0' + month : month} - ${year}`;
+
+           //getting day
+           const weekdays = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THRUSDAY','FRIDAY','SATURDAY'];
+           const day = weekdays[now.getDay()];
+
+           //display
+           document.getElementById('time').innerText = `TIME : ${timeString}`; 
+           document.getElementById('date').innerText = `DATE : ${dateString}`; 
+           document.getElementById('day').innerText = `DAY : ${day}`; 
+
+        }
+           // updating the function for every second
+           setInterval(updateDateTime,1000);
+
+           updateDateTime();
+
+    </script>
+</body>
+</html>
